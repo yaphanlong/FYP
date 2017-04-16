@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_regression"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin">
+
+                <ProgressBar
+                    android:id="@+id/progressBarMonthlyChart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    style="@style/Widget.CardContent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Actual FootFall vs Prediction"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                            android:textColor="@color/colorPrimary" />
+
+                        <ImageView
+                            android:id="@+id/monthlyPredictionInfoImg"
+                            android:layout_width="24dp"
+                            android:contentDescription="@string/info"
+                            android:layout_height="24dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/info" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="8dp">
+
+                        <CheckBox
+                            android:id="@+id/checkBoxMonthlyPR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:text="@string/psi_rainfall"
+                            android:textColor="@color/purple" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxMonthlyPRE"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/checkBoxMonthlyPR"
+                            android:text="@string/psi_rainfall_event"
+                            android:textColor="@color/lightblue" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxMonthlyPREW"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/checkBoxMonthlyPRE"
+                            android:text="@string/psi_rainfall_event_weekend"
+                            android:textColor="@color/pink" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxMonthlyPREWO"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/checkBoxMonthlyPREW"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/psi_rainfall_event_weekend_oversea_holiday"
+                            android:textColor="@color/teal" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxMonthlyPREWOL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/checkBoxMonthlyPREWO"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/psi_rainfall_event_weekend_oversea_holiday_local_holiday"
+                            android:textColor="@color/orange" />
+
+                        <com.github.mikephil.charting.charts.CombinedChart
+                            android:id="@+id/monthlyPredictionChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:layout_below="@+id/checkBoxMonthlyPREWOL"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/monthlyPredictionChart"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/psi_rainfall"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/purple"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_blank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/monthlyPredictionChart"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_cc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_text"
+                            android:text="@string/correlation_coefficient"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/textCCValuePR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/psi_rainfall_blank"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_mae"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_cc"
+                            android:text="@string/mean_absolute_error"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/textMAEValuePR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/textCCValuePR"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_mae"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/psi_rainfall_event"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/lightblue"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_blank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/psi_rainfall_mae"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_cc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_event_text"
+                            android:text="@string/correlation_coefficient"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/textCCValuePRE"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/psi_rainfall_event_blank"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_mae"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_event_cc"
+                            android:text="@string/mean_absolute_error"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/textMAEValuePRE"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/textCCValuePRE"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_weekend_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_event_mae"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/psi_rainfall_event_weekend"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/pink"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_weekend_blank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/psi_rainfall_event_mae"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_weekend_cc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_event_weekend_text"
+                            android:text="@string/correlation_coefficient"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/textCCValuePREW"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/psi_rainfall_event_weekend_blank"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_weekend_mae"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_event_weekend_cc"
+                            android:text="@string/mean_absolute_error"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/textMAEValuePREW"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/textCCValuePREW"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_weekend_oh_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_event_weekend_mae"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/psi_rainfall_event_weekend_oversea_holiday"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/teal"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_weekend_oh_blank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/psi_rainfall_event_weekend_mae"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_weekend_oh_cc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_event_weekend_oh_text"
+                            android:text="@string/correlation_coefficient"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/textCCValuePREWO"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/psi_rainfall_event_weekend_oh_blank"
+                            android:layout_marginTop="20dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_weekend_oh_mae"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_event_weekend_oh_cc"
+                            android:text="@string/mean_absolute_error"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/textMAEValuePREWO"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/textCCValuePREWO"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_weekend_oh_lh_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_event_weekend_oh_mae"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/psi_rainfall_event_weekend_oversea_holiday_local_holiday"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/orange"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_weekend_oh_lh_blank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/psi_rainfall_event_weekend_oh_mae"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_weekend_oh_lh_cc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_event_weekend_oh_lh_text"
+                            android:text="@string/correlation_coefficient"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/textCCValuePREWOL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/psi_rainfall_event_weekend_oh_lh_blank"
+                            android:layout_marginTop="20dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/psi_rainfall_event_weekend_oh_lh_mae"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/psi_rainfall_event_weekend_oh_lh_cc"
+                            android:text="@string/mean_absolute_error"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                        <TextView
+                            android:id="@+id/textMAEValuePREWOL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/textCCValuePREWOL"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin">
+
+                <LinearLayout
+                    style="@style/Widget.CardContent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dailyPredictionTitle"
+                            android:layout_gravity="center_vertical"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                            android:textColor="@color/colorPrimary" />
+
+                        <ImageView
+                            android:id="@+id/regression_day_chart_info_img"
+                            android:layout_width="24dp"
+                            android:contentDescription="@string/info"
+                            android:layout_height="24dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/info" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="8dp">
+
+                        <CheckBox
+                            android:id="@+id/checkBoxDailyPR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:text="@string/psi_rainfall"
+                            android:textColor="@color/purple" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxDailyPRE"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/checkBoxDailyPR"
+                            android:text="@string/psi_rainfall_event"
+                            android:textColor="@color/lightblue" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxDailyPREW"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/checkBoxDailyPRE"
+                            android:text="@string/psi_rainfall_event_weekend"
+                            android:textColor="@color/pink" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxDailyPREWO"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/checkBoxDailyPREW"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/psi_rainfall_event_weekend_oversea_holiday"
+                            android:textColor="@color/teal" />
+
+                        <CheckBox
+                            android:id="@+id/checkBoxDailyPREWOL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/checkBoxDailyPREWO"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/psi_rainfall_event_weekend_oversea_holiday_local_holiday"
+                            android:textColor="@color/orange" />
+
+                        <com.github.mikephil.charting.charts.CombinedChart
+                            android:id="@+id/dailyPredictionChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:layout_below="@+id/checkBoxDailyPREWOL"
+                            android:layout_marginTop="4dp" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

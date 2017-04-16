@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "966184047276",
+    "firebase_url": "https://mandai-zoo.firebaseio.com",
+    "project_id": "mandai-zoo",
+    "storage_bucket": "mandai-zoo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966184047276:android:b7f92aaca503b301",
+        "android_client_info": {
+          "package_name": "zoo.mandai.fyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966184047276-usofig0paaagm7cr6ukuckqqmkat6rtc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4E91MO-jjsSCi9MTnastBH5JYdlgCQ_g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

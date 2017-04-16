@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/card_margin">
+
+                    <LinearLayout
+                        style="@style/Widget.CardContent"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/current_footfall"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                                android:textColor="@color/colorPrimary"/>
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/kfcRow"
+                            style="@style/FootfallRelative">
+
+                            <TextView
+                                android:id="@+id/kfcText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/kfcCurrent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/slash"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/slash"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/kfcMax"
+                                android:text="@string/slash"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/kfcMax"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <ProgressBar
+                                android:id="@+id/kfcBar"
+                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/kfcCurrent"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/australianRow"
+                            style="@style/FootfallRelative">
+
+                            <TextView
+                                android:id="@+id/australianText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/australianCurrent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/slash1"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/slash1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/australianMax"
+                                android:text="@string/slash"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/australianMax"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <ProgressBar
+                                android:id="@+id/australianBar"
+                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/australianCurrent"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/entranceRow"
+                            style="@style/FootfallRelative">
+
+                            <TextView
+                                android:id="@+id/entranceText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/entranceCurrent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/slash2"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/slash2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/entranceMax"
+                                android:text="@string/slash"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/entranceMax"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <ProgressBar
+                                android:id="@+id/entranceBar"
+                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/entranceCurrent"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/ahmengRow"
+                            style="@style/FootfallRelative">
+
+                            <TextView
+                                android:id="@+id/ahmengText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/ahmengCurrent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/slash3"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/slash3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/ahmengMax"
+                                android:text="@string/slash"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/ahmengMax"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <ProgressBar
+                                android:id="@+id/ahmengBar"
+                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/ahmengCurrent"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/sphRow"
+                            style="@style/FootfallRelative">
+
+                            <TextView
+                                android:id="@+id/sphText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/sphCurrent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/slash4"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/slash4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/sphMax"
+                                android:text="@string/slash"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/sphMax"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <ProgressBar
+                                android:id="@+id/sphBar"
+                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/sphCurrent"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/whrcRow"
+                            style="@style/FootfallRelative">
+
+                            <TextView
+                                android:id="@+id/whrcText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/whrcCurrent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/slash5"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/slash5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/whrcMax"
+                                android:text="@string/slash"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/whrcMax"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <ProgressBar
+                                android:id="@+id/whrcBar"
+                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/whrcCurrent"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/ampRow"
+                            style="@style/FootfallRelative">
+
+                            <TextView
+                                android:id="@+id/ampText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/ampCurrent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/slash6"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/slash6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/ampMax"
+                                android:text="@string/slash"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/ampMax"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <ProgressBar
+                                android:id="@+id/ampBar"
+                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/ampCurrent"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/elephantRow"
+                            style="@style/FootfallRelative">
+
+                            <TextView
+                                android:id="@+id/elepantText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/elephantCurrent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/slash7"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/slash7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/elephantMax"
+                                android:text="@string/slash"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/elephantMax"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <ProgressBar
+                                android:id="@+id/elephantBar"
+                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/elephantCurrent"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/taxiRow"
+                            style="@style/FootfallRelative">
+
+                            <TextView
+                                android:id="@+id/taxiText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/taxiCurrent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/slash8"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/slash8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/taxiMax"
+                                android:text="@string/slash"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <TextView
+                                android:id="@+id/taxiMax"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                            <ProgressBar
+                                android:id="@+id/taxiBar"
+                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/taxiCurrent"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</android.support.design.widget.CoordinatorLayout>

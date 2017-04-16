@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">mVis</string>
+    <string name="footfall">Footfall</string>
+    <string name="weather">Weather</string>
+    <string name="current_footfall">Current Footfall</string>
+    <string name="estimated_footfall">Estimated Footfall</string>
+    <string name="slash">/</string>
+    <string name="current_psi">Current PSI</string>
+    <string name="events">Events</string>
+    <string name="holidays">Holidays</string>
+    <string name="trends">Trends</string>
+    <string name="weather_forecast">48hr Forecast</string>
+    <string name="info">Information</string>
+    <string name="weather_img">Weather Condition</string>
+    <string name="select_day">Select a day</string>
+    <string name="select_month">Select a Month</string>
+    <string name="hazardous">Hazardous (Above 300)</string>
+    <string name="unhealthy_vunhealthy">Unhealthy – V. Unhealthy (101–300)</string>
+    <string name="good_moderate">Good – Moderate (0–100)</string>
+    <string name="psi">PSI</string>
+    <string name="rainfall">Rainfall</string>
+    <string name="tourist_arrivals">Tourist Arrivals</string>
+    <string name="mandai">Mandai</string>
+    <string name="psi_rainfall">PSI + RainFall</string>
+    <string name="psi_rainfall_event">PSI + RainFall + Event</string>
+    <string name="psi_rainfall_event_weekend">PSI + RainFall + Event + Weekend</string>
+    <string name="psi_rainfall_event_weekend_oversea_holiday">PSI + RainFall + Event + Weekend + Oversea Holiday</string>
+    <string name="psi_rainfall_event_weekend_oversea_holiday_local_holiday">PSI + RainFall + Event + Weekend + Oversea Holiday + Local Holiday</string>
+    <string name="correlation_coefficient">Correlation Coefficient</string>
+    <string name="mean_absolute_error">Mean Absolute Error</string>
+
+    <string-array name="regions">
+        <item name="kfc" type="string">KFC at KidzWorld</item>
+        <item name="australian" type="string">Australian Outback</item>
+        <item name="entrance" type="string">Entrance behind ticket counters</item>
+        <item name="ahmeng" type="string">Ah Meng Restaurant</item>
+        <item name="sph" type="string">SPH Kiosk</item>
+        <item name="whrc" type="string">WHRC</item>
+        <item name="amp" type="string">Amphitheatre</item>
+        <item name="elephant" type="string">Elephant Show</item>
+        <item name="taxi" type="string">Taxi Stand</item>
+    </string-array>
+</resources>
