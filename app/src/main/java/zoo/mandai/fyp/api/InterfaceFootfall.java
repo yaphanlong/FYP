@@ -2,7 +2,7 @@ package zoo.mandai.fyp.api;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
-import zoo.mandai.fyp.model.footfall.FootFall;
+import zoo.mandai.fyp.POJO.footfall.FootFall;
 
 public interface InterfaceFootfall {
 

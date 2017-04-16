@@ -1,10 +1,8 @@
 package zoo.mandai.fyp.api;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 import retrofit2.http.GET;
-import zoo.mandai.fyp.model.weather.Weather;
+import zoo.mandai.fyp.POJO.weather.Weather;
 
 public interface InterfaceWeather {
 

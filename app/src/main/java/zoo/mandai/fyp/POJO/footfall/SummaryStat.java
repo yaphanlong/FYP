@@ -1,4 +1,4 @@
-package zoo.mandai.fyp.model.footfall;
+package zoo.mandai.fyp.POJO.footfall;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

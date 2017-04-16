@@ -1,4 +1,4 @@
-package zoo.mandai.fyp.model.weather;
+package zoo.mandai.fyp.POJO.weather;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package zoo.mandai.fyp.model.event;
+package zoo.mandai.fyp.POJO.event;
 
 
 import com.google.gson.annotations.Expose;

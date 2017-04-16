@@ -1,4 +1,4 @@
-package zoo.mandai.fyp.model.firebase;
+package zoo.mandai.fyp.POJO.firebase;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

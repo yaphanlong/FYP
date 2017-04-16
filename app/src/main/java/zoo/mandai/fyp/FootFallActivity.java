@@ -32,14 +32,10 @@ import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import zoo.mandai.fyp.api.ApiService;
-import zoo.mandai.fyp.api.InterfaceFootfall;
-import zoo.mandai.fyp.model.firebase.Threshold;
-import zoo.mandai.fyp.model.footfall.FootFall;
-import zoo.mandai.fyp.model.footfall.SapInformation;
+import zoo.mandai.fyp.POJO.firebase.Threshold;
+import zoo.mandai.fyp.POJO.footfall.FootFall;
+import zoo.mandai.fyp.POJO.footfall.SapInformation;
 
 
 public class FootFallActivity extends AppCompatActivity {
@@ -207,7 +203,7 @@ public class FootFallActivity extends AppCompatActivity {
         }
     }
 
-    //display dialogs
+    //display dialogs for user input
     private void showDialog(String title, String value, int index) {
         new MaterialDialog.Builder(this)
                 .title(title)

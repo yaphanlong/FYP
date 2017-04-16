@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 import weka.classifiers.Evaluation;
 import weka.classifiers.functions.SMOreg;
 import weka.core.Instances;
@@ -49,7 +51,6 @@ public class PredictionActivity extends AppCompatActivity {
 
     //Monthly Prediction Card
     @BindView(R.id.monthlyPredictionChart) CombinedChart monthlyPredictionChart;
-    @BindView(R.id.monthlyPredictionInfoImg) ImageView monthlyPredictionInfoImg;
     @BindView(R.id.checkBoxMonthlyPR) CheckBox checkBoxMonthlyPR;
     @BindView(R.id.checkBoxMonthlyPRE) CheckBox checkBoxMonthlyPRE;
     @BindView(R.id.checkBoxMonthlyPREW) CheckBox checkBoxMonthlyPREW;
@@ -107,16 +108,18 @@ public class PredictionActivity extends AppCompatActivity {
             Remove remove = new Remove();
             remove.setOptions(options);
             remove.setInputFormat(trainDataset);
-
+            //filter both training and test set based on different heuristics
             Instances trainDatasetFiltered = Filter.useFilter(trainDataset, remove);
             trainDatasetFiltered.setClassIndex(trainDatasetFiltered.numAttributes() - 1);
 
             Instances testDatasetFiltered = Filter.useFilter(testDataset, remove);
             testDatasetFiltered.setClassIndex(testDatasetFiltered.numAttributes() - 1);
 
+            //train filtered training set using SMOreg
             SMOreg smo = new SMOreg();
             smo.buildClassifier(trainDatasetFiltered);
 
+            //evaluate each model trained
             DecimalFormat df = new DecimalFormat("0.000");
             Evaluation eval = new Evaluation(trainDatasetFiltered);
             eval.crossValidateModel(smo, testDatasetFiltered, 10, new Random(1));
@@ -137,6 +140,7 @@ public class PredictionActivity extends AppCompatActivity {
                 textMAEValuePREWOL.setText(String.valueOf(df.format(eval.meanAbsoluteError())));
             }
 
+            //store predicted monthly and daily footfall for each model trained
             for (int i = 0; i < testDatasetFiltered.numInstances(); i++) {
                 if (testDataset.instance(i).stringValue(0).contains("Nov")) {
                     Map<String, Integer> predictDayMap = predictMap.get(0);
@@ -176,6 +180,12 @@ public class PredictionActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
+        checkBoxMonthlyPR.setChecked(false);
+        checkBoxMonthlyPRE.setChecked(false);
+        checkBoxMonthlyPREW.setChecked(false);
+        checkBoxMonthlyPREWO.setChecked(false);
+        checkBoxMonthlyPREWOL.setChecked(false);
+
         for (int i = 0; i < 4; i++) {
             actualMonthMap.put(i, new LinkedHashMap<>());
             predictPRMonthMap.put(i, new LinkedHashMap<>());
@@ -195,17 +205,19 @@ public class PredictionActivity extends AppCompatActivity {
         try {
             ConverterUtils.DataSource trainSource = new ConverterUtils.DataSource(PredictionActivity.this.getAssets().open("training.arff"));
             Instances trainDataset = trainSource.getDataSet();
-
+            //read training set from assets folder
             ConverterUtils.DataSource testSource = new ConverterUtils.DataSource(PredictionActivity.this.getAssets().open("test.arff"));
             Instances testDataset = testSource.getDataSet();
             testDataset.setClassIndex(testDataset.numAttributes() - 1);
-
+            //read test set from assets folder
+            //train and test model using different heuristics
             predictPRCount = prediction(trainDataset, testDataset, new String[]{"-R", "1,4,5,6,7"}, predictPRMonthMap, 1);
             predictPRECount = prediction(trainDataset, testDataset, new String[]{"-R", "1,5,6,7"}, predictPREMonthMap, 2);
             predictPREWCount = prediction(trainDataset, testDataset, new String[]{"-R", "1,6,7"}, predictPREWMonthMap, 3);
             predictPREWOCount = prediction(trainDataset, testDataset, new String[]{"-R", "1,7"}, predictPREWOMonthMap, 4);
             predictPREWOLCount = prediction(trainDataset, testDataset, new String[]{"-R", "1"}, predictPREWOLMonthMap, 5);
 
+            //store actual monthly and daily footfall
             for (int i = 0; i < testDataset.numInstances(); i++) {
                 if (testDataset.instance(i).stringValue(0).contains("Nov")) {
                     Map<String, Integer> actualDayMap = actualMonthMap.get(0);
@@ -237,23 +249,36 @@ public class PredictionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        checkBoxMonthlyPR.setChecked(false);
-        checkBoxMonthlyPRE.setChecked(false);
-        checkBoxMonthlyPREW.setChecked(false);
-        checkBoxMonthlyPREWO.setChecked(false);
-        checkBoxMonthlyPREWOL.setChecked(false);
+        monthlyPredictionChart.setDrawBarShadow(false);
+        monthlyPredictionChart.getDescription().setEnabled(false);
+        monthlyPredictionChart.setPinchZoom(false);
+        monthlyPredictionChart.setDoubleTapToZoomEnabled(false);
+        monthlyPredictionChart.setScaleEnabled(false);
+        monthlyPredictionChart.setDrawGridBackground(false);
 
-        monthlyPredictionInfoImg.setOnClickListener(v -> {
-            Tooltip.Builder builder = new Tooltip.Builder(v)
-                    .setCancelable(true)
-                    .setDismissOnClick(false)
-                    .setCornerRadius(20f)
-                    .setGravity(Gravity.BOTTOM)
-                    .setTextColor(Color.parseColor("#FFFFFF"))
-                    .setBackgroundColor(getColor(R.color.colorPrimary))
-                    .setText("• Compare prediction using different factors\n• Both Axis - FootFall numbers");
-            builder.show();
-        });
+        XAxis xAxis = monthlyPredictionChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setGranularity(1f);
+        xAxis.setSpaceMin(0.5f);
+        xAxis.setSpaceMax(0.5f);
+        xAxis.setValueFormatter((value, axis) -> mMonths[(int) value % mMonths.length]);
+
+        YAxis leftAxis = monthlyPredictionChart.getAxisLeft();
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setValueFormatter(new LargeValueFormatter());
+        YAxis rightAxis = monthlyPredictionChart.getAxisRight();
+        rightAxis.setDrawGridLines(false);
+        rightAxis.setAxisMinimum(0f);
+        rightAxis.setValueFormatter(new LargeValueFormatter());
+
+        Legend l = monthlyPredictionChart.getLegend();
+        l.setWordWrapEnabled(true);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(false);
 
         for (int i = 0; i < 4; i++) {
             barEntriesFootFallMonth.add(new BarEntry(i, actualCount[i]));
@@ -290,37 +315,6 @@ public class PredictionActivity extends AppCompatActivity {
         monthlyPredictionChart.setData(combinedDataMonthly);
         monthlyPredictionChart.animateY(800, Easing.EasingOption.EaseInOutQuad);
 
-        monthlyPredictionChart.setDrawBarShadow(false);
-        monthlyPredictionChart.getDescription().setEnabled(false);
-        monthlyPredictionChart.setPinchZoom(false);
-        monthlyPredictionChart.setDoubleTapToZoomEnabled(false);
-        monthlyPredictionChart.setScaleEnabled(false);
-        monthlyPredictionChart.setDrawGridBackground(false);
-
-        XAxis xAxis = monthlyPredictionChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setDrawGridLines(false);
-        xAxis.setGranularity(1f);
-        xAxis.setSpaceMin(0.5f);
-        xAxis.setSpaceMax(0.5f);
-        xAxis.setValueFormatter((value, axis) -> mMonths[(int) value % mMonths.length]);
-
-        YAxis leftAxis = monthlyPredictionChart.getAxisLeft();
-        leftAxis.setDrawGridLines(false);
-        leftAxis.setAxisMinimum(0f);
-        leftAxis.setValueFormatter(new LargeValueFormatter());
-        YAxis rightAxis = monthlyPredictionChart.getAxisRight();
-        rightAxis.setDrawGridLines(false);
-        rightAxis.setAxisMinimum(0f);
-        rightAxis.setValueFormatter(new LargeValueFormatter());
-
-        Legend l = monthlyPredictionChart.getLegend();
-        l.setWordWrapEnabled(true);
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setDrawInside(false);
-
         monthlyPredictionChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
@@ -337,6 +331,19 @@ public class PredictionActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @OnClick(R.id.imageMonthlyPredictionInfo)
+    public void imageMonthlyPredictionInfo(View v) {
+        Tooltip.Builder builder = new Tooltip.Builder(v)
+                .setCancelable(true)
+                .setDismissOnClick(false)
+                .setCornerRadius(20f)
+                .setGravity(Gravity.BOTTOM)
+                .setTextColor(Color.parseColor("#FFFFFF"))
+                .setBackgroundColor(getColor(R.color.colorPrimary))
+                .setText("• Compare prediction using different factors\n• Both Axis - FootFall numbers");
+        builder.show();
     }
 
     @OnCheckedChanged(R.id.checkBoxMonthlyPR)
@@ -564,6 +571,7 @@ public class PredictionActivity extends AppCompatActivity {
         }
     }
 
+    //plot daily actual vs prediction chart based on selected month
     private void plotDailyChart(int index) {
         dailyPredictionChart.setDrawBarShadow(false);
         dailyPredictionChart.getDescription().setEnabled(false);
@@ -905,6 +913,7 @@ public class PredictionActivity extends AppCompatActivity {
         }
     }
 
+    //set line attributes
     private void setLineAttributes(LineDataSet lineDataSet, int color, boolean rightYDependency, String colorHex) {
         lineDataSet.setColors(new int[]{color}, PredictionActivity.this);
         lineDataSet.setDrawValues(false);

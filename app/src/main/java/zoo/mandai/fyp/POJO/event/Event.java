@@ -1,7 +1,4 @@
-package zoo.mandai.fyp.model.event;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+package zoo.mandai.fyp.POJO.event;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

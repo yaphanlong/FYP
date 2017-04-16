@@ -61,7 +61,7 @@
                             android:textColor="@color/colorPrimary" />
 
                         <ImageView
-                            android:id="@+id/monthlyPredictionInfoImg"
+                            android:id="@+id/imageMonthlyPredictionInfo"
                             android:layout_width="24dp"
                             android:contentDescription="@string/info"
                             android:layout_height="24dp"

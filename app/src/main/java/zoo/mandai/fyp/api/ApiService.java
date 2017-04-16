@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiService {
 
+    //weather api call
     public InterfaceWeather serviceWeather() {
         return new Retrofit.Builder().baseUrl("https://api.darksky.net/forecast/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -17,6 +18,7 @@ public class ApiService {
                 .create(InterfaceWeather.class);
     }
 
+    //psi api call
     public InterfacePSI servicePSI() {
         return new Retrofit.Builder().baseUrl("https://api.data.gov.sg/v1/environment/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -25,6 +27,7 @@ public class ApiService {
                 .create(InterfacePSI.class);
     }
 
+    //footfall api call
     public InterfaceFootfall serviceFootfall() {
         return new Retrofit.Builder().baseUrl("https://api.sap.lbasense.com/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -33,6 +36,7 @@ public class ApiService {
                 .create(InterfaceFootfall.class);
     }
 
+    //event api call
     public InterfaceEvent serviceEvent() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
                 .addInterceptor(chain -> {

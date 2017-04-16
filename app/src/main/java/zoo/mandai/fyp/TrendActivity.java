@@ -66,11 +66,11 @@ import io.reactivex.schedulers.Schedulers;
 import mobi.gspd.segmentedbarview.Segment;
 import mobi.gspd.segmentedbarview.SegmentedBarView;
 import zoo.mandai.fyp.api.ApiService;
-import zoo.mandai.fyp.model.event.Event;
-import zoo.mandai.fyp.model.event.Events;
-import zoo.mandai.fyp.model.firebase.Data;
-import zoo.mandai.fyp.model.firebase.Day;
-import zoo.mandai.fyp.model.firebase.Holiday;
+import zoo.mandai.fyp.POJO.event.Event;
+import zoo.mandai.fyp.POJO.event.Events;
+import zoo.mandai.fyp.POJO.firebase.Data;
+import zoo.mandai.fyp.POJO.firebase.Day;
+import zoo.mandai.fyp.POJO.firebase.Holiday;
 
 public class TrendActivity extends AppCompatActivity {
 
@@ -190,6 +190,7 @@ public class TrendActivity extends AppCompatActivity {
         mCompositeDisposable.clear();
     }
 
+    //tool tip builder
     private void tooltipBuilder(View v, String text) {
         Tooltip.Builder builder = new Tooltip.Builder(v).setCancelable(true)
                 .setDismissOnClick(false)
@@ -431,7 +432,9 @@ public class TrendActivity extends AppCompatActivity {
         });
     }
 
+    //initialise daily chart
     private void initDailyChart() {
+        textDailyTitle.setText(R.string.select_month);
         combinedChartDaily.setDrawBarShadow(false);
         combinedChartDaily.getDescription().setEnabled(false);
         combinedChartDaily.setPinchZoom(false);
@@ -469,6 +472,7 @@ public class TrendActivity extends AppCompatActivity {
         rightHolidayAxis.setAxisMinimum(0f);
     }
 
+    //plot daily chart based on selected month
     private void plotDailyChart(int index) {
         textDailyTitle.setText(String.format("%s FootFall vs Holiday", firebaseData.get2016().get(index).getMonth()));
 
@@ -696,6 +700,7 @@ public class TrendActivity extends AppCompatActivity {
         }
     }
 
+    //initialise daily summary
     private void initDailySummary() {
         textDailySummaryTitle.setText(R.string.select_day);
         Segment segmentGood = new Segment(0, 50, "Good", Color.parseColor("#4CAF50"));
@@ -721,6 +726,7 @@ public class TrendActivity extends AppCompatActivity {
         recyclerViewDailyEvent.addItemDecoration(new DividerItemDecoration(TrendActivity.this, LinearLayoutManager.VERTICAL));
     }
 
+    //plot daily summary based on selected day
     private void plotDailySummary(int index, List<Day> dayList) {
         textDailySummaryTitle.setText(String.format("%s Summary", dayList.get(index).getDate()));
         dailyFootfall.setText(String.valueOf(dayList.get(index).getTotal()));

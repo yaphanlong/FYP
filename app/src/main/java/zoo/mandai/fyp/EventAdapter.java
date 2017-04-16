@@ -14,7 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import zoo.mandai.fyp.model.event.Event;
+import zoo.mandai.fyp.POJO.event.Event;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
     private List<Event> eventList;

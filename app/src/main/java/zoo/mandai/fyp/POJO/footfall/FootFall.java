@@ -1,4 +1,4 @@
-package zoo.mandai.fyp.model.footfall;
+package zoo.mandai.fyp.POJO.footfall;
 
 import java.util.ArrayList;
 import java.util.List;

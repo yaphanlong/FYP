@@ -1,4 +1,4 @@
-package zoo.mandai.fyp.model.psi;
+package zoo.mandai.fyp.POJO.psi;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;

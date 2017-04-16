@@ -10,7 +10,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import zoo.mandai.fyp.model.firebase.Holiday;
+import zoo.mandai.fyp.POJO.firebase.Holiday;
 
 
 public class HolidayAdapter extends RecyclerView.Adapter<HolidayAdapter.ViewHolder> {

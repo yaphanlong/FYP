@@ -1,4 +1,4 @@
-package zoo.mandai.fyp.model.weather;
+package zoo.mandai.fyp.POJO.weather;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;

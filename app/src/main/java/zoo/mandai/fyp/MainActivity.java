@@ -74,17 +74,17 @@ import weka.core.converters.ConverterUtils;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Remove;
 import zoo.mandai.fyp.api.ApiService;
-import zoo.mandai.fyp.model.event.Event;
-import zoo.mandai.fyp.model.event.Events;
-import zoo.mandai.fyp.model.firebase.Data;
-import zoo.mandai.fyp.model.firebase.Holiday;
-import zoo.mandai.fyp.model.footfall.FootFall;
-import zoo.mandai.fyp.model.footfall.SapInformation;
-import zoo.mandai.fyp.model.psi.PSI;
-import zoo.mandai.fyp.model.psi.Pm25SubIndex;
-import zoo.mandai.fyp.model.weather.Currently;
-import zoo.mandai.fyp.model.weather.Hourly;
-import zoo.mandai.fyp.model.weather.Weather;
+import zoo.mandai.fyp.POJO.event.Event;
+import zoo.mandai.fyp.POJO.event.Events;
+import zoo.mandai.fyp.POJO.firebase.Data;
+import zoo.mandai.fyp.POJO.firebase.Holiday;
+import zoo.mandai.fyp.POJO.footfall.FootFall;
+import zoo.mandai.fyp.POJO.footfall.SapInformation;
+import zoo.mandai.fyp.POJO.psi.PSI;
+import zoo.mandai.fyp.POJO.psi.Pm25SubIndex;
+import zoo.mandai.fyp.POJO.weather.Currently;
+import zoo.mandai.fyp.POJO.weather.Hourly;
+import zoo.mandai.fyp.POJO.weather.Weather;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         mCompositeDisposable.clear();
     }
 
+    //display model information
     @OnClick(R.id.modelBtn)
     public void modelBtn() {
         new MaterialDialog.Builder(this).title("Regression Model")
@@ -171,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
+    //prediction
     @OnClick(R.id.predictBtn)
     public void predictBtn() {
         try {
@@ -180,7 +182,8 @@ public class MainActivity extends AppCompatActivity {
             }
             Instances testDataset = new Instances("Test", attributeList, attributesName.length);
             testDataset.setClassIndex(testDataset.numAttributes() - 1);
-
+            //create new data set with attributes and set class index
+            //create new instance of the data set from user inputs
             Instance testInstance = new DenseInstance(attributesName.length);
             testInstance.setValue(attributeList.get(0), Double.parseDouble(rainfallInput.getText().toString()));
             testInstance.setValue(attributeList.get(1), Double.parseDouble(psiInput.getText().toString()));
@@ -202,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
             }
             testInstance.setValue(attributeList.get(6), '?');
             testDataset.add(testInstance);
-
+            //predict instance created from user input based on model trained from training set
             double predictedFootfall = smo.classifyInstance(testDataset.instance(0));
             footfallPrediction.setText(String.format("Predicted FootFall: %s", String.valueOf((int) predictedFootfall)));
         } catch (Exception e) {
@@ -259,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
         tooltipBuilder(v, "• Predict footfall by setting the 6 factors\n• Click on card for more info");
     }
 
+    //tool tip builder
     private void tooltipBuilder(View v, String text) {
         Tooltip.Builder builder = new Tooltip.Builder(v).setCancelable(true)
                 .setDismissOnClick(false)
@@ -275,15 +279,15 @@ public class MainActivity extends AppCompatActivity {
         try {
             ConverterUtils.DataSource source = new ConverterUtils.DataSource(MainActivity.this.getAssets().open("training.arff"));
             Instances trainDataset = source.getDataSet();
-
+            //read training set from assets folder
             String[] opts = new String[]{"-R", "1"};
             Remove remove = new Remove();
             remove.setOptions(opts);
             remove.setInputFormat(trainDataset);
-
+            //remove first column of the data (date) and set class index
             Instances trainDatasetFiltered = Filter.useFilter(trainDataset, remove);
-
             trainDatasetFiltered.setClassIndex(trainDatasetFiltered.numAttributes() - 1);
+            //train filtered data using SMOreg
             smo = new SMOreg();
             smo.buildClassifier(trainDatasetFiltered);
             model_string = smo.toString();

@@ -3,7 +3,7 @@ package zoo.mandai.fyp.api;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
-import zoo.mandai.fyp.model.psi.PSI;
+import zoo.mandai.fyp.POJO.psi.PSI;
 
 public interface InterfacePSI {
 
